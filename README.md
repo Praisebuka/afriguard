@@ -1,6 +1,6 @@
-#  About MediaAid
+#  About AfriGuard
 
-MediaAid as the name implies is here to help the media team of the digital sector :>
+AfriGuard as the name implies is here to help the media team of the digital sector :>
 
 - - - - -
 

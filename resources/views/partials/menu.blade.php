@@ -3,7 +3,7 @@
     <a href="#" class="brand-link" style="text-align: center">
         {{-- <span class="brand-text font-weight-light">{{ trans('panel.site_title') }}</span> --}}
         <span style="color: #f82249"><i class="fa fa-camera" aria-hidden="true"></i></span>
-          {{ env('APP_NAME', 'MediaAid') }}
+          {{ env('APP_NAME', 'AfriGuard') }}
     </a>
 
     <!-- Sidebar -->

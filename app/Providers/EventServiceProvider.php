@@ -10,7 +10,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * MediaAid listener mappings for the application.
+     * AfriGuard listener mappings for the application.
      *
      * @var array
      */

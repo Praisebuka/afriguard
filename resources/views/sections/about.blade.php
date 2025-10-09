@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <h2> About MediaAid </h2>
+        <h2> About AfriGuard </h2>
         <p>{{ $settings['about_description'] ?? '' }}</p>
       </div>
       <div class="col-lg-3">

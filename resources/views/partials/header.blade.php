@@ -5,7 +5,7 @@
       <h1 style="text-transform: none">
         <a href="{{ route('home') }}#intro">
           <span><i class="fa fa-camera" aria-hidden="true"></i></span>
-          {{ env('APP_NAME', 'MediaAid') }}
+          {{ env('APP_NAME', 'AfriGuard') }}
         </a>
       </h1>
     </div>

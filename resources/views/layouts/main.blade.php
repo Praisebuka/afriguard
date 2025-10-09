@@ -17,7 +17,7 @@
   <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
   <link href="{{ asset('lib/venobox/venobox.css') }}" rel="stylesheet">
   <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-  <link rel="icon" href="{{ asset('img/mediaAid.png') }}" type="image/x-icon">
+  <link rel="icon" href="{{ asset('img/afriguard.png') }}" type="image/x-icon">
 
   <!-- Main Stylesheet File -->
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">

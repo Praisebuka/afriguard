@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Welcome back to MediaAid',
+    'site_title' => 'Welcome back to AfriGuard',
 ];

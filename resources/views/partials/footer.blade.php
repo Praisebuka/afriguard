@@ -4,9 +4,9 @@
       <div class="row">
 
         <div class="col-lg-5 col-md-6 footer-info">
-          <img src="img/mediaAid.png" alt="MediaAid">
+          <img src="img/afriguard.png" alt="AfriGuard" style="width: 7rem;height:7rem">
           {{-- <span><i class="fa fa-camera" aria-hidden="true"></i></span>
-          {{ env('APP_NAME', 'MediaAid') }} --}}
+          {{ env('APP_NAME', 'AfriGuard') }} --}}
           <p>{{ $settings['footer_description'] ?? '' }}</p>
         </div>
 
@@ -17,12 +17,6 @@
             <li><i class="fa fa-angle-right"></i> <a href="#"> About us </a></li>
             <li><i class="fa fa-angle-right"></i> <a href="#"> Contact us </a></li>
             <li><i class="fa fa-angle-right"></i> <a href="#"> Contact us </a></li>
-            {{-- <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li> --}}
-            {{-- <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-            <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li> --}}
-            {{-- @guest
-              <li><i class="fa fa-angle-right"></i> <a href="{{ route('login') }}">Login</a></li>
-            @endguest --}}
             @auth
               <li><i class="fa fa-angle-right"></i> <a href="{{ route('admin.home') }}">Admin Panel</a></li>
             @endauth
@@ -30,13 +24,9 @@
         </div>
 
         <div class="col-lg-2 col-md-6 footer-links">
-          {{-- <h4> Services </h4> --}}
           <ul>
-            {{-- <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-            <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-            <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li> --}}
-            <li><i class="fa fa-angle-right"></i> <a href="#"> Services </a></li>
-            <li><i class="fa fa-angle-right"></i> <a href="#"> All Events </a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="#"> Our Services </a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="#"> Plan & Pricings </a></li>
             <li><i class="fa fa-angle-right"></i> <a href="#"> Privacy policy </a></li>
             {{-- @guest
               <li><i class="fa fa-angle-right"></i> <a href="{{ route('login') }}">Login</a></li>
@@ -71,7 +61,7 @@
 
   <div class="container">
     <div class="copyright">
-      &copy; Copyright <strong>{{ env('APP_NAME', 'MediaAid') }}</strong>. All Rights Reserved
+      &copy; Copyright <strong>{{ env('APP_NAME', 'AfriGuard') }}</strong>. All Rights Reserved
     </div>
     <div class="credits">
       Designed by <a href="https://twitter.com/Praisebuka"> Praisebuka </a>
