@@ -4,7 +4,7 @@
     <div id="logo" class="pull-left">
       <h1 style="text-transform: none">
         <a href="{{ route('home') }}#intro">
-          <span><i class="fa fa-camera" aria-hidden="true"></i></span>
+          <span><i class="fa fa-shield" aria-hidden="true"></i></span>
           {{ env('APP_NAME', 'AfriGuard') }}
         </a>
       </h1>
