@@ -6,7 +6,7 @@
 <main id="main">
   @include('sections.about')
 
-  @include('sections.hotels')
+  @include('sections.who_are_we')
   
   @include('sections.schedule')
   

@@ -23,7 +23,7 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'key'   => 'about_description',
-                'value' => 'Sed nam ut dolor qui repellendus iusto odit. Possimus inventore eveniet accusamus error amet eius aut accusantium et. Non odit consequatur repudiandae sequi ea odio molestiae. Enim possimus sunt inventore in est ut optio sequi unde.'
+                'value' => 'We are your smart go-to SME for scaling your system in terms of Cyber Security. We offer alot of combined cyber needed skills at such affordable & low prices'
             ],
             [
                 'key'   => 'about_where',

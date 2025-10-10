@@ -6,8 +6,8 @@
         <p>{{ $settings['about_description'] ?? '' }}</p>
       </div>
       <div class="col-lg-3">
-        <h3> Where </h3>
-        <p>{!! $settings['about_where'] ?? '' !!}</p>
+        <h3> Find Us @ </h3>
+        <p> <i class="fa fa-map-pin"></i> {!! $settings['about_where'] ?? '' !!}</p>
       </div>
       <div class="col-lg-3">
         <h3> MVP Launch </h3>
