@@ -10,7 +10,8 @@ class SettingsTableSeeder extends Seeder
         $settings = [
             [
                 'key'   => 'title',
-                'value' => 'The Annual<br><span>Marketing</span> Conference'
+                // 'value' => 'The Annual<br><span>Marketing</span> Conference'
+                'value' => 'Cybersecurity for<br><span>Small</span>&<span>Medium</span> Enterprises'
             ],
             [
                 'key'   => 'subtitle',

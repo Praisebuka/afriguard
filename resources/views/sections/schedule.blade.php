@@ -1,8 +1,8 @@
 <section id="schedule" class="section-with-bg">
   <div class="container wow fadeInUp">
     <div class="section-header">
-      <h2> Event Schedule </h2>
-      <p> Here is our event schedule </p>
+      <h2> Plans & Pricing </h2>
+      <p> Here is our Pricing Plans </p>
     </div>
 
     <ul class="nav nav-tabs" role="tablist">

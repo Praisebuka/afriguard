@@ -10,7 +10,7 @@ Route::get('/reset-password', 'RegisterController@create')->name('password.reset
 Route::get('/reset-password', 'RegisterController@create')->name('password.reset');
 Route::get('speaker/{speaker}', 'HomeController@view')->name('speaker');
 Route::redirect('/home', '/admin');
-// Auth::routes(['register' => false]);
+Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
