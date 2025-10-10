@@ -16,7 +16,7 @@
                     {{ \Session::get('message') }}
                 </p>
             @endif
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('register') }}" method="POST">
                 {{ csrf_field() }}
 
                 <div class="form-group">
@@ -33,6 +33,16 @@
                     @if($errors->has('password'))
                         <div class="invalid-feedback">
                             {{ $errors->first('password') }}
+                        </div>
+                    @endif
+                </div>
+
+                
+                <div class="form-group">
+                    <input type="password" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.phone') }}" name="phone">
+                    @if($errors->has('phone'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('phone') }}
                         </div>
                     @endif
                 </div>
@@ -55,17 +65,12 @@
 
 
 
-            <p class="mb-1">
-                <a class="" href="{{ route('password.reset') }}">
-                    {{ trans('global.forgot_password') }}
-                </a>
-            </p>
+            <p class="mb-1"> <a class="" href="{{ route('password.reset' , 'email') }}"> {{ trans('global.forgot_password') }} </a> </p>
+
             <p class="mb-0">
 
             </p>
-            <p class="mb-1">
-
-            </p>
+            <p class="mb-1"> <a class="" href="{{ route('login') }}"> Already have an account? </a> </p>
         </div>
         <!-- /.login-card-body -->
     </div>

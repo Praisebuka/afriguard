@@ -16,7 +16,8 @@
         <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#pricing"> Plans & Pricing </a></li>
         <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#features"> Services </a></li>
         <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#contact"> Contact Us </a></li>
-        <li class="buy-tickets"><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}register"> Register </a></li>
+        <li class="buy-tickets"><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}login  "> Login </a></li>
+        {{-- <li class="buy-tickets"><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}register"> Register </a></li> --}}
       </ul>
     </nav>
   </div>

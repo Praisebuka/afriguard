@@ -10,7 +10,7 @@
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg"> Sign in to start your session </p>
+            <p class="login-box-msg"> Sign in to your account </p>
             @if(\Session::has('message'))
                 <p class="alert alert-info">
                     {{ \Session::get('message') }}
@@ -55,17 +55,12 @@
 
 
 
-            <p class="mb-1">
-                <a class="" href="{{ route('password.reset' , 'email') }}">
-                    {{ trans('global.forgot_password') }}
-                </a>
-            </p>
+            <p class="mb-1"> <a class="" href="{{ route('password.reset' , 'email') }}"> {{ trans('global.forgot_password') }} </a> </p>
+
             <p class="mb-0">
 
             </p>
-            <p class="mb-1">
-
-            </p>
+            <p class="mb-1"> <a class="" href="/register"> Don't have an Account? </a> </p>
         </div>
         <!-- /.login-card-body -->
     </div>
