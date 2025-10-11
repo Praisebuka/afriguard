@@ -77,12 +77,34 @@ class RegisterController extends Controller
     public function register(Request $req)
     {
         try {
-            
-            // dd($req->all());
-            $this->validator($req->all());
 
+            # Validation
+            $validatedData = $req->validate([
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'phone' => ['required', 'string', 'min:11', 'max:15'],
+            ]);
+
+            # Create user
+            $user = User::create([
+                'email' => $validatedData['email'],
+                'phone' => $validatedData['phone'],
+                'password' => Hash::make($validatedData['password']),
+            ]);
+
+            # Auto-login the user
+            auth()->login($user);
+
+            if ($req->expectsJson()) { return response()->json(['message' => 'Registration Successful', 'user' => $user], 201); }
+
+            return redirect($this->redirectTo)->with('status', 'Registration Successful!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Laravel handles this automatically for web requests
+            if ($req->expectsJson()) { return response()->json(['message' => 'Validation failed', 'errors' => $e->errors()], 422); }
+            throw $e;
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Error Registeriing User', 'error' => $e->getMessage()], 422);
+            return response()->json([ 'message' => 'Error registering user', 'error' => config('app.debug') ? $e->getMessage() : 'Server error' ], 500);
         }
     }
+
 }

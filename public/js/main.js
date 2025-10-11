@@ -1,3 +1,7 @@
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+
+
 $(document).ready(function () {
   window._token = $('meta[name="csrf-token"]').attr('content')
 

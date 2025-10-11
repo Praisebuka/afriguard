@@ -75,4 +75,5 @@
         <!-- /.login-card-body -->
     </div>
 </div>
+
 @endsection
