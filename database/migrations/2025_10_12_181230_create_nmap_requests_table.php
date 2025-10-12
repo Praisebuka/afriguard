@@ -14,19 +14,21 @@ class CreateNmapRequestsTable extends Migration
     public function up()
     {
         Schema::create('nmap_requests', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('target');
-            $table->string('status')->default('pending'); # pending, processing, completed, failed
+            $table->string('status')->default('pending');
             $table->string('output_file')->nullable();
             $table->text('result')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
 
-            # Index to prevent duplicate scans for the same target by the same user
             $table->unique(['user_id', 'target', 'status'], 'unique_user_target_status');
         });
+
     }
 
     /**

@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class LoginController extends Controller
 {
@@ -48,27 +49,34 @@ class LoginController extends Controller
      */
     public function login(Request $req)
     {
-        // Validate req
-        $req->validate([
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
+            
+        try { 
 
-        // Check if user exists and password is correct
-        $user = User::where('email', $req->email)->first();
-        if (!$user || !Hash::check($req->password, $user->password)) {
-            return response()->json([ 'message' => 'Invalid credentials' ], 401);
+            # Validate req
+            $req->validate([
+                'email' => 'required|email',
+                'password' => 'required|string|min:6',
+            ]);
+
+            // Check if user exists and password is correct
+            $user = User::where('email', $req->email)->first();
+            if (!$user || !Hash::check($req->password, $user->password)) {
+                return response()->json([ 'message' => 'Invalid credentials' ], 401);
+            }
+
+            // Check if email is verified
+            if ($user->email_verified_at === null) {
+                return response()->json([ 'message' => 'Please verify your email address' ], 403);
+            }
+
+            // Generate API token using Passport
+            $token = $user->createToken('Personal Access Token')->accessToken;
+
+            return response()->json([ 'message' => 'Login successful', 'user' => $user, 'token' => $token ], 200);
+            
+        } catch (Throwable $th) {
+            return response()->json(['status' => 500, 'message' => $th->getMessage()]);
         }
-
-        // Check if email is verified
-        if ($user->email_verified_at === null) {
-            return response()->json([ 'message' => 'Please verify your email address' ], 403);
-        }
-
-        // Generate API token using Passport
-        $token = $user->createToken('Personal Access Token')->accessToken;
-
-        return response()->json([ 'message' => 'Login successful', 'user' => $user, 'token' => $token ], 200);
     }
 
 }
