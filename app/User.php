@@ -3,12 +3,14 @@
 namespace App;
 
 use Carbon\Carbon;
+use Exception;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -17,37 +19,47 @@ class User extends Authenticatable
 
     public $table = 'users';
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = [ 'password', 'remember_token', ];
 
-    protected $dates = [
-        'updated_at',
-        'created_at',
-        'deleted_at',
-        'email_verified_at',
-    ];
+    protected $dates = [ 'updated_at', 'created_at', 'deleted_at', ];
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'remember_token',
-        'email_verified_at',
-    ];
+    protected $fillable = [ 'name', 'email', 'password', 'created_at', 'updated_at', 'deleted_at', 'remember_token', 'email_verified_at', ];
 
     public function getEmailVerifiedAtAttribute($value)
     {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+        if (!$value) { return null; }
+
+        try {
+            // Default to database format if config is not set
+            $dateFormat = config('panel.date_format', 'Y-m-d');
+            $timeFormat = config('panel.time_format', 'H:i:s');
+            $format = $dateFormat . ' ' . $timeFormat;
+
+            return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format($format);
+        } catch (Exception $e) {
+            Log::error('Failed to parse email_verified_at: ' . $e->getMessage());
+            return $value; // Return raw value to avoid breaking the application
+        }
     }
 
     public function setEmailVerifiedAtAttribute($value)
     {
-        $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+        if (!$value) {
+            $this->attributes['email_verified_at'] = null;
+            return;
+        }
+
+        try {
+            // Default to database format if config is not set
+            $dateFormat = config('panel.date_format', 'Y-m-d');
+            $timeFormat = config('panel.time_format', 'H:i:s');
+            $format = $dateFormat . ' ' . $timeFormat;
+
+            $this->attributes['email_verified_at'] = Carbon::createFromFormat($format, $value)->format('Y-m-d H:i:s');
+        } catch (\Exception $e) {
+            Log::error('Failed to set email_verified_at: ' . $e->getMessage());
+            $this->attributes['email_verified_at'] = null;
+        }
     }
 
     public function setPasswordAttribute($input)
