@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class LoginController extends Controller
@@ -77,6 +78,47 @@ class LoginController extends Controller
             
         } catch (Throwable $th) {
             return response()->json(['status' => 500, 'message' => $th->getMessage()]);
+        }
+    }
+
+
+    /**
+     * Handle user registration
+     *
+     * @param Request $req
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function register(Request $req)
+    {
+        try {
+
+            # Validate req
+            $req->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6|confirmed',
+                'phone' => 'nullable|string|max:20',
+            ]);
+
+            # Create user
+            $user = User::create([
+                'name' => $req->name,
+                'email' => $req->email,
+                'password' => $req->password, # Automatically hashed by setPasswordAttribute
+                'phone' => $req->phone,
+            ]);
+
+            #Trigger Registered event (for email verification
+            event(new Registered($user));
+
+            # Generate API token using Passport
+            $token = $user->createToken('Personal Access Token')->accessToken;
+
+            return response()->json([ 'message' => 'Registration Successful', 'user' => $user, 'token' => $token ], 201);
+
+        } catch (\Throwable $th) {
+            Log::error('Registration failed: ' . $th->getMessage());
+            return response()->json([ 'status' => 500, 'message' => $th->getMessage() ], 500);
         }
     }
 
