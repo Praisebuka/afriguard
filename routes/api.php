@@ -11,6 +11,7 @@ Route::get('/v1', function () {
 
 Route::prefix('/v1')->group(function () {
     Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::post('register', [LoginController::class, 'register'])->name('rgister');
 
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/nmap-scan', [PentestingController::class, 'nmapScan']);

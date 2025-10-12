@@ -20,6 +20,15 @@
                 {{ csrf_field() }}
 
                 <div class="form-group">
+                    <input type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus placeholder="{{ trans('global.user_name') }}" name="name" value="{{ old('name', null) }}">
+                    @if($errors->has('name'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('name') }}
+                        </div>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autofocus placeholder="{{ trans('global.login_email') }}" name="email" value="{{ old('email', null) }}">
                     @if($errors->has('email'))
                         <div class="invalid-feedback">
