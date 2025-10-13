@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class LoginController extends Controller
@@ -97,7 +98,7 @@ class LoginController extends Controller
             $req->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|string|min:6|confirmed',
+                'password' => 'required|string|min:8',
                 'phone' => 'nullable|string|max:20',
             ]);
 
@@ -117,9 +118,12 @@ class LoginController extends Controller
 
             return response()->json([ 'message' => 'Registration Successful', 'user' => $user, 'token' => $token ], 201);
 
-        } catch (\Throwable $th) {
+        } catch (ValidationException $e) {
+            // Let validation errors bubble up to return 422 with details
+            throw $e;
+        } catch (Throwable $th) {
             Log::error('Registration failed: ' . $th->getMessage());
-            return response()->json([ 'status' => 500, 'message' => $th->getMessage() ], 500);
+            return response()->json([ 'status' => 500, 'message' => 'An unexpected error occurred during registration.' ], 500);
         }
     }
 
