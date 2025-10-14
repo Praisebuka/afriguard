@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginAPIController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PentestingController;
 use Illuminate\Support\Facades\Route;
@@ -10,8 +11,8 @@ Route::get('/v1', function () {
 });
 
 Route::prefix('/v1')->group(function () {
-    Route::post('login', [LoginController::class, 'login'])->name('login');
-    Route::post('register', [LoginController::class, 'register'])->name('rgister');
+    Route::post('login', [LoginAPIController::class, 'login'])->name('login');
+    Route::post('register', [LoginAPIController::class, 'register'])->name('rgister');
 
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/nmap-scan', [PentestingController::class, 'nmapScan']);
