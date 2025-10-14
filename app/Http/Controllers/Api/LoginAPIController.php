@@ -43,7 +43,7 @@ class LoginAPIController extends Controller
             }
 
             #Generate API token using Passport
-            $token = $user->createToken('Personal Access Token')->accessToken;
+            $token = $user->createToken('authToken')->accessToken;
 
             return response()->json([ 'message' => 'Login Successful', 'user' => $user, 'token' => $token ], 200);
             
@@ -83,7 +83,7 @@ class LoginAPIController extends Controller
             event(new Registered($user));
 
             # Generate API token using Passport
-            $token = $user->createToken('Personal Access Token')->accessToken;
+            $token = $user->createToken('authToken')->accessToken;
 
             return response()->json([ 'message' => 'Registration Successful', 'user' => $user, 'token' => $token ], 201);
 

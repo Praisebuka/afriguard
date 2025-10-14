@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginAPIController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PentestingController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,6 +19,12 @@ Route::prefix('/v1')->group(function () {
         Route::post('/nmap-scan', [PentestingController::class, 'nmapScan']);
     });
 
+    Route::get('/clear-config', function () {
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('config:cache');
+        return 'Config cleared and re-cached successfully.';
+    });
 });
 
 
