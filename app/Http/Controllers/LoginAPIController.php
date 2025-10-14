@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -12,8 +11,7 @@ use Throwable;
 
 class LoginAPIController extends Controller
 {
-
-    /**
+     /**
      * Handle user login
      *
      * @param Request $request
@@ -91,7 +89,6 @@ class LoginAPIController extends Controller
             return response()->json([ 'status' => 'error', 'message' => 'Validation failed.', 'errors' => $e->errors(), ], 422);
         } catch (\Throwable $th) {
             Log::error('Registration failed: ' . $th->getMessage());
-
             return response()->json([ 'status' => 'error', 'message' => $th->getMessage(), ], 500);
         }
     }

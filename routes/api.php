@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginAPIController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoginAPIController;
 use App\Http\Controllers\PentestingController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
