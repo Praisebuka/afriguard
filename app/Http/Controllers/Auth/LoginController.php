@@ -118,12 +118,12 @@ class LoginController extends Controller
 
             return response()->json([ 'message' => 'Registration Successful', 'user' => $user, 'token' => $token ], 201);
 
-        } catch (ValidationException $e) {
-            // Let validation errors bubble up to return 422 with details
-            throw $e;
-        } catch (Throwable $th) {
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([ 'status' => 'error', 'message' => 'Validation failed.', 'errors' => $e->errors(), ], 422);
+        } catch (\Throwable $th) {
             Log::error('Registration failed: ' . $th->getMessage());
-            return response()->json([ 'status' => 500, 'message' => 'An unexpected error occurred during registration.' ], 500);
+
+            return response()->json([ 'status' => 'error', 'message' => $th->getMessage(), ], 500);
         }
     }
 
