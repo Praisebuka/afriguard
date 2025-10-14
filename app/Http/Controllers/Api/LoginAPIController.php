@@ -75,7 +75,7 @@ class LoginAPIController extends Controller
             $user = User::create([
                 'name' => $req->name,
                 'email' => $req->email,
-                'password' => $req->password, # Automatically hashed by setPasswordAttribute
+                'password' => $req->password,
                 'phone' => $req->phone,
             ]);
 
