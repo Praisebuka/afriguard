@@ -12,6 +12,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Fruitcake\Cors\HandleCors::class,
     ];
 
     protected $middlewareGroups = [
@@ -19,6 +20,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             \App\Http\Middleware\AuthGates::class,
+            \Fruitcake\Cors\HandleCors::class,
         ],
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
