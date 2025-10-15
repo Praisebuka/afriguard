@@ -46,7 +46,7 @@ class LoginAPIController extends Controller
             return response()->json([ 'message' => 'Login Successful', 'user' => $user, 'token' => $token ], 200);
             
         } catch (Throwable $th) {
-            return response()->json(['status' => 500, 'message' => $th->getMessage()]);
+            return response()->json(['status' => 500, 'message' => $th->getMessage()], 500);
         }
     }
 
