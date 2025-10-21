@@ -38,11 +38,22 @@ Route::prefix('/v1')->group(function () {
     //     return 'Config cleared and re-cached successfully.';
     // });
 
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        # finds the user and updates the `email_verified_at` field
-        $request->fulfill();
-        return response()->json([ 'message' => 'Email has been successfully verified!' ]);
+    Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+        $user = User::findOrFail($id);
+
+        if (! hash_equals($hash, sha1($user->getEmailForVerification()))) {
+            abort(403, 'Invalid verification link.');
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            return response()->json(['message' => 'Email already verified.']);
+        }
+
+        $user->markEmailAsVerified();
+
+        return response()->json(['message' => 'Email successfully verified!']);
     })->middleware('signed')->name('verification.verify');
+
     
     Route::post('/resend-verification', function (Request $request) {
         $request->validate(['email' => 'required|email']);
