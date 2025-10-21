@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeToAfriguard;
 use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Throwable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class LoginAPIController extends Controller
 {
@@ -79,11 +83,21 @@ class LoginAPIController extends Controller
 
             #Trigger Registered event (for email verification
             event(new Registered($user));
+            # Send msg to user to verify their acct
+            
+            # Generate the verification URL
+            $verificationUrl = URL::temporarySignedRoute( 'verification.verify', Carbon::now()->addMinutes(180),
+                ['id' => $user->getKey(), 'hash' => sha1($user->getEmailForVerification())]
+            );
+
+            # Send our custom welcome & verification email
+            Mail::to($user->email)->send(new WelcomeToAfriguard($user, $verificationUrl));
 
             # Generate API token using Passport
             $token = $user->createToken('authToken')->accessToken;
 
-            return response()->json([ 'message' => 'Registration Successful', 'user' => $user, 'token' => $token ], 201);
+
+            return response()->json([ 'message' => 'Registration Successful. Please check your email to verify your account.', 'user' => $user, 'token' => $token ], 201);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([ 'status' => 'error', 'message' => 'Validation failed.', 'errors' => $e->errors(), ], 422);
