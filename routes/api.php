@@ -30,13 +30,13 @@ Route::prefix('/v1')->group(function () {
     });
 
 
-    Route::get('/clear-config', function () {
-        Artisan::call('config:clear');
-        Artisan::call('cache:clear');
-        Artisan::call('config:cache');
-        Artisan::call('view:clear');
-        return 'Config cleared and re-cached successfully.';
-    });
+    // Route::get('/clear-config', function () {
+    //     Artisan::call('config:clear');
+    //     Artisan::call('cache:clear');
+    //     Artisan::call('config:cache');
+    //     Artisan::call('view:clear');
+    //     return 'Config cleared and re-cached successfully.';
+    // });
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         # finds the user and updates the `email_verified_at` field.
