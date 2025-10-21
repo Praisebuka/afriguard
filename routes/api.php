@@ -13,6 +13,8 @@ Route::get('/v1', function () {
     return response()->json([ 'status' => 'success', 'message' => 'AfriGuard Version 1.0', 'data' => [ 'v1' => url('api/v1/'), 's' => $_SERVER['REMOTE_ADDR'], ]]);
 });
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
 Route::prefix('/v1')->group(function () {
     Route::post('login', [LoginAPIController::class, 'login'])->name('login');
     Route::post('register', [LoginAPIController::class, 'register'])->name('rgister');
@@ -27,6 +29,7 @@ Route::prefix('/v1')->group(function () {
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
         Artisan::call('config:cache');
+        Artisan::call('view:clear');
         return 'Config cleared and re-cached successfully.';
     });
 
