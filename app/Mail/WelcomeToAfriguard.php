@@ -18,7 +18,10 @@ class WelcomeToAfriguard extends Mailable
      *
      * @var \App\User
      */
+
     public $user;
+
+    public $url;
 
     /**
      * Create a new message instance.
@@ -26,9 +29,10 @@ class WelcomeToAfriguard extends Mailable
      * @param \App\User $user
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, string $url)
     {
         $this->user = $user;
+        $this->url = $url;
     }
 
     /**
@@ -38,7 +42,7 @@ class WelcomeToAfriguard extends Mailable
      */
     public function build()
     {
-        return $this->subject('Welcome to AfriGuard 💙 Please Verify Your Email')->markdown('emails.welcome');
+        return $this->subject('Welcome to AfriGuard 💙 Please Verify Your Email')->markdown('emails.welcome')->with([ 'user' => $this->user, 'url'  => $this->url, ]);;
     }
     
 }
