@@ -39,7 +39,7 @@ Route::prefix('/v1')->group(function () {
     // });
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        # finds the user and updates the `email_verified_at` field.
+        # finds the user and updates the `email_verified_at` field
         $request->fulfill();
         return response()->json([ 'message' => 'Email has been successfully verified!' ]);
     })->middleware('signed')->name('verification.verify');
