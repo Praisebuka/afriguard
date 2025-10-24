@@ -2,23 +2,25 @@
 
 namespace App\Notifications;
 
+use App\Models\NmapRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class ScanCompletedNotification extends Notification
 {
     use Queueable;
 
+    protected $nmapRequest;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(NmapRequest $nmapRequest)
     {
-        //
+        $this->nmapRequest = $nmapRequest;
     }
 
     /**
@@ -29,21 +31,7 @@ class ScanCompletedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return ['database'];
     }
 
     /**
@@ -55,7 +43,10 @@ class ScanCompletedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'title' => 'Scan Completed!',
+            'message' => 'Your scan for ' . $this->nmapRequest->target . ' is complete. View the report now.',
+            'url' => '/dashboard/scan/' . $this->nmapRequest->id,
+            'target' => $this->nmapRequest->target,
         ];
     }
 }
