@@ -51,4 +51,5 @@ Then visit to see your project backend starting point
 
 ## 🔗 Links
 [![Vercel Frontend](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://afriguard-frontend.vercel.app)
+[![Netlify Frontend](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://afriguard.netlify.app)
 
