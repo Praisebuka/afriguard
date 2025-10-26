@@ -37,6 +37,12 @@ And then, serve your project
   php artisan serve
 ```
 
+Then visit to see your project backend starting point
+
+```bash
+    localhost:8000/api/v1
+```    
+
 
 ## Author
 
