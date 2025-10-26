@@ -5,7 +5,7 @@ Hello,
 
 This is a confirmation that your vulnerability scan for **{{ $nmapRequest->target }}** has started.
 
-We will notify you again as soon as the scan is complete. This process typically takes about 5-10 minutes.
+We will notify you again as soon as the scan is complete. This process typically takes about 2-3 minutes.
 
 You can check the status on your dashboard.
 

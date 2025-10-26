@@ -56,7 +56,7 @@ class RunNmapScan implements ShouldQueue
             $user->notify(new ScanStartedNotification($this->nmapRequest));
 
             # wait for 5 minutes (300 seconds) - This is our MVP simulation
-            sleep(300);
+            sleep(120);
 
             # create FAKE vulnerability data for the MVP
             $fakeResults = [
