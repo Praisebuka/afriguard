@@ -1,12 +1,48 @@
 #  About AfriGuard
 
-AfriGuard as the name implies is here to help the media team of the digital sector :>
+Afriguard's MVP stage project offers value to SMEs businesses looking for automated operations, easy implementation, offline capability & continuous security monitoring with accessible results and actionable guidance.
 
-- - - - -
+## Installation
 
-# More from Praise?
+To deploy this project on your local server after cloning or pulling to your PC, you'll need to have composer install(for windows users) or homebrew(for mac and linux users), which you can of course get at...
 
-- My Twitter page [@Praisebuka](https://x.com/praisebuka)
-- LinkedIn [@Praisebuka](https://www.linkedin.com/in/praisebuka)
-- Facebook [@Praisebuka](https://www.facebook.com/praisebuka)
-- Github [@Praisebuka](https://www.github.com/Praisebuka)
+Download composer at: https://getcomposer.org/
+
+or
+Download composer at: https://brew.sh/
+
+After the installation, you then need to run this command.
+
+```bash
+  composer install 
+```
+
+And then migrate your backend
+
+```bash
+  php artisan migrate 
+```
+
+Duplicate the .env.example file in the repo and rename yours to .env only so it works for your local, run 
+
+
+```bash
+  php artisan key:generate
+```
+
+And then, serve your project
+
+
+```bash
+  php artisan serve
+```
+
+
+## Author
+
+- [@Praisebuka]('https://github.com/Praisebuka')
+
+
+## 🔗 Links
+[![Vercel Frontend](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://afriguard-frontend.vercel.app)
+
